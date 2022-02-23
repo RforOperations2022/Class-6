@@ -6,10 +6,17 @@ library(DBI)
 library(pool)
 
 # You should always store credentials and keys in a file or enviornmental variable and have it ignored in your Git repository (if a file)
+# json 
 creds <- jsonlite::fromJSON(".creds.json")
+un <- creds$un
+pw <- creds$pw
+# .env example
+dotenv::load_dot_env()
+un <- Sys.getenv("un")
+pw <- Sys.getenv("pw")
 
 # Create the DB Connection
-pool <- dbPool(odbc::odbc(), driver = "FreeTDS", server = "IP_or_HOST_ADDRESS", port = 1433, database = "DBName", uid = creds$un, pwd = creds$pw, TDS_Version = "8.0")
+pool <- dbPool(odbc::odbc(), driver = "FreeTDS", server = "IP_or_HOST_ADDRESS", port = 1433, database = "DBName", uid = un , pwd = pw, TDS_Version = "8.0")
 
 # Get some stuff for UI
 conn <- poolCheckout(pool)
