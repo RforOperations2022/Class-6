@@ -12,8 +12,8 @@ un <- creds$un
 pw <- creds$pw
 # .env example
 dotenv::load_dot_env()
-un <- Sys.getenv("un")
-pw <- Sys.getenv("pw")
+un1 <- Sys.getenv("un")
+pw1 <- Sys.getenv("pw")
 
 # Create the DB Connection
 pool <- dbPool(odbc::odbc(), driver = "FreeTDS", server = "IP_or_HOST_ADDRESS", port = 1433, database = "DBName", uid = un , pwd = pw, TDS_Version = "8.0")
@@ -77,7 +77,7 @@ server <- function(input, output, session) {
    )
    dataFilter <- 
    output$examplePlot <- renderPlot({
-     data <- dataFikter()
+     data <- dataFilter()
      
      req(input$dates)
      table<- filter(DATE >= input$dates[1] & DATE <= input$dates[2])
